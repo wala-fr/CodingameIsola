@@ -1,0 +1,142 @@
+<div
+	style="color: #000000; background-color: rgba(255, 255, 255, 0.5); padding: 20px; margin-bottom: 10px; text-align: left">
+	This is a port of the board game <a
+		href="https://fr.wikipedia.org/wiki/Isola_(jeu)">Isolation</a> or
+	Isola in french : <br /><br />
+	<p style="text-align: center;">
+		<img src="https://i.ibb.co/MZ35ccf/isola-statement.png"
+			style="height: 150px; width: auto;"></img>
+	</p>
+	Click <a href="https://github.com/wala-fr">here</a> for the
+	referee.<br />
+</div>
+
+<div id="statement_back" class="statement_back" style="display: none"></div>
+<div class="statement-body">
+	<!-- GOAL -->
+	<div class="statement-section statement-goal">
+		<h1>
+			<span class="icon icon-goal">&nbsp;</span> <span>The Goal</span>
+		</h1>
+		<div class="statement-goal-content">The goal of the game is to
+			block the opponent pawn.</div>
+	</div>
+	<!-- RULES -->
+	<div class="statement-section statement-rules">
+		<h1>
+			<span class="icon icon-rules">&nbsp;</span> <span>Rules</span>
+		</h1>
+		<div class="statement-rules-content">
+			<strong>Board: </strong>
+			<ul>
+				<li>The game is played on a 7x7 board.</li>
+				<li>Player 0 always starts at (0, 3) and player 1 at (6, 3).</li>
+			</ul>
+			<strong>At each turn: </strong><br>
+			<ol>
+				<li>You must <b>move your pawn</b> to an adjacent tile (diagonally
+					included).<br />You can't :
+					<ul>
+						<li>stay put</li>
+						<li>move to the tile occupied by the opponent pawn</li>
+						<li>move to an already removed tile.</li>
+					</ul>
+
+					<p style="text-align: center;">
+						<img src="https://i.ibb.co/8DjTxZK/moves.png"
+							style="display: block; margin-left: auto; margin-right: auto; height: 200px; width: auto;"></img>
+					</p>
+				</li>
+				<li>You must <b>remove an accessible tile</b>.<br />You can't remove
+					a tile occupied by a pawn.
+				</li>
+			</ol>
+		</div>
+	</div>
+
+	<!-- Victory conditions -->
+	<div class="statement-victory-conditions">
+		<div class="icon victory"></div>
+		<div class="blk">
+			<div class="title">Victory Conditions</div>
+			<div class="text">
+				<ul style="padding-bottom: 0;">
+					<li>The opponent pawn can't move.</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- Lose conditions -->
+	<div class="statement-lose-conditions">
+		<div class="icon lose"></div>
+		<div class="blk">
+			<div class="title">Loss Conditions</div>
+			<div class="text">
+				<ul style="padding-bottom: 0;">
+					<li>Your pawn can't move.</li>
+					<li>You do not respond in time or output an invalid action.</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- PROTOCOL -->
+	<div class="statement-section statement-protocol">
+		<h1>
+			<span class="icon icon-protocol">&nbsp;</span> <span>Game
+				Input</span>
+		</h1>
+
+		<!-- Protocol block -->
+		<div class="blk">
+			<div class="title">Initialization input</div>
+			<div class="text">
+				<span class="statement-lineno">First line</span>:
+				<var>id</var>
+				: The id of the player. <br> <span class="statement-lineno">Second
+					line</span>:
+				<var>playerPositionX</var>
+				: the x coordinate of your pawn. <br> <span
+					class="statement-lineno">Second line</span>:
+				<var>playerPositionY</var>
+				: the y coordinate of your pawn.
+			</div>
+			<div class="title">Input for one game turn</div>
+			<div class="text">
+				<span class="statement-lineno">Next <var>opponentPositionX</var></span>:
+				the x coordinate of the opponent pawn. <br> <span
+					class="statement-lineno">Next <var>opponentPositionY</var></span>:
+				the y coordinate of the opponent pawn. <br> <span
+					class="statement-lineno">Next <var>opponentLastRemovedTileX</var></span>:
+				the x coordinate of the last tile removed by the opponent (-1 if no
+				tile has been removed (first round)). <br> <span
+					class="statement-lineno">Next <var>opponentLastRemovedTileY</var></span>:
+				the y coordinate of the last tile removed by the opponent (-1 if no
+				tile has been removed (first round)). <br>
+			</div>
+		</div>
+
+		<!-- Protocol block -->
+		<div class="blk">
+			<div class="title">Output</div>
+			<div class="text">
+				<span class="statement-lineno">A single line</span> containing the
+				coordinates where you want to move your pawn, followed by the
+				coordinates of the tile you want to remove. Example "3 1 3 5".<br>
+				You can also print messages by doing the following. Example: "3 1 3
+				5;message". <br>
+			</div>
+		</div>
+
+		<!-- Protocol block -->
+		<div class="blk">
+			<div class="title">Constraints</div>
+			Response time first turn is &le;
+			<const>1000</const>
+			ms. <br>Response time per turn is &le;
+			<const>100</const>
+			ms.
+		</div>
+	</div>
+</div>
