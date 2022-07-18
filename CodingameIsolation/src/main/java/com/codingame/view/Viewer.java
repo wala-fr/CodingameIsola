@@ -5,7 +5,6 @@ import com.codingame.gameengine.core.MultiplayerGameManager;
 import com.codingame.gameengine.module.entities.Circle;
 import com.codingame.gameengine.module.entities.GraphicEntityModule;
 import com.codingame.gameengine.module.entities.RoundedRectangle;
-import com.codingame.gameengine.module.toggle.ToggleModule;
 import com.codingame.gameengine.module.tooltip.TooltipModule;
 import com.codingame.model.Board;
 import com.codingame.model.Point;
@@ -100,7 +99,7 @@ public class Viewer {
       setPawnPosition(i, teamPosition);
     }
     for (int i = 0; i < 2; ++i) {
-      playerUIS[i] = new PlayerUI(gameManager.getPlayer(i), graphics, this, board);
+      playerUIS[i] = new PlayerUI(gameManager.getPlayer(i), graphics, tooltips, this, board);
     }
   }
 
@@ -112,7 +111,8 @@ public class Viewer {
       int player) {
     playerUIS[player].group.setAlpha(1);
     playerUIS[1 - player].group.setAlpha(0.5);
-    playerUIS[player].update(graphics, gameManager.getPlayer(player).getMessage(), move, tile);
+    playerUIS[player].update(
+        graphics, tooltips, gameManager.getPlayer(player).getMessage(), move, tile);
     graphics.commitEntityState(0, playerUIS[player].group);
     graphics.commitEntityState(0, playerUIS[1 - player].group);
 

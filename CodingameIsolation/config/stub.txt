@@ -1,4 +1,3 @@
-read id:int
 read playerPositionX:int
 read playerPositionY:int
 gameloop
@@ -9,7 +8,6 @@ read opponentLastRemovedTileY:int
 write RANDOM;MESSAGE
 
 INPUT
-id: player id.
 playerPositionY:player coordinates.
 opponentPositionY:opponent coordinates.
 opponentLastRemovedTileY:coordinates of last removed tile. (-1 -1) if no tile has been removed.

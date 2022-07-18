@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class Agent2 {
   public static void main(String args[]) {
     Scanner in = new Scanner(System.in);
-    int id = in.nextInt();
     int x = in.nextInt();
     int y = in.nextInt();
     // game loop

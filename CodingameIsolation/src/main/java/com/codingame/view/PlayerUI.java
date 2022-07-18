@@ -5,6 +5,7 @@ import com.codingame.gameengine.module.entities.GraphicEntityModule;
 import com.codingame.gameengine.module.entities.Group;
 import com.codingame.gameengine.module.entities.RoundedRectangle;
 import com.codingame.gameengine.module.entities.Text;
+import com.codingame.gameengine.module.tooltip.TooltipModule;
 import com.codingame.model.Board;
 import com.codingame.model.Point;
 
@@ -13,7 +14,7 @@ public class PlayerUI {
   private Text tileRemoved;
   private Text message;
 
-  PlayerUI(Player player, GraphicEntityModule graphics, Viewer viewer, Board board) {
+  PlayerUI(Player player, GraphicEntityModule graphics, TooltipModule tooltips, Viewer viewer, Board board) {
     int teamId = player.getIndex();
     int startX = teamId == 0 ? 200 : graphics.getWorld().getWidth() - 200;
     int startY = 150;
@@ -78,12 +79,14 @@ public class PlayerUI {
             .setFontFamily(ViewConstant.FONT)
             .setAnchorX(0.5)
             .setFillColor(ViewConstant.WRITE_COLOR);
+    tooltips.setTooltipText(message, "");
     group.add(message);
   }
 
-  void update(GraphicEntityModule graphics, String msg, Point move, Point tile) {
-    if (!msg.equals(message.getText())) {
-      message.setText(msg);
+  void update(GraphicEntityModule graphics, TooltipModule tooltips, String msg, Point move, Point tile) {
+    if (!msg.equals(tooltips.getTooltipText(message))) {
+      message.setText(msg.substring(0, Math.min(msg.length(), 12)).trim());
+      tooltips.setTooltipText(message, msg);
       graphics.commitEntityState(0.1, message);
     }
     tileRemoved.setText(tile.toInputString());

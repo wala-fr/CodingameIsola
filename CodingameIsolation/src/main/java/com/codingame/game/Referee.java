@@ -48,7 +48,7 @@ public class Referee extends AbstractReferee {
       currentPlayer.execute();
       String[] outputs = currentPlayer.getOutputs().get(0).split(";");
       if (outputs.length > 1) {
-        String message = outputs[1].substring(0, Math.min(outputs[1].length(), 12)).trim();
+        String message = outputs[1];
         currentPlayer.setMessage(message);
       }
       outputs[0] = outputs[0].toUpperCase().trim();
@@ -103,7 +103,6 @@ public class Referee extends AbstractReferee {
   public void sendInputs(int turn) {
     int id = currentPlayer.getIndex();
     if (turn <= 2) {
-      currentPlayer.sendInputLine(Integer.toString(id));
       currentPlayer.sendInputLine(Integer.toString(board.getTeamPosition(id).getX()));
       currentPlayer.sendInputLine(Integer.toString(board.getTeamPosition(id).getY()));
     }
