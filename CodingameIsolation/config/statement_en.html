@@ -1,14 +1,17 @@
 <div
 	style="color: #000000; background-color: rgba(255, 255, 255, 0.5); padding: 20px; margin-bottom: 10px; text-align: left">
-	This is a port of the board game <a
-		href="https://fr.wikipedia.org/wiki/Isola_(jeu)">Isolation</a> or
-	Isola in french : <br /><br />
+	This is a port of the board game Isolation or <a
+		href="https://fr.wikipedia.org/wiki/Isola_(jeu)">Isola</a> in french :
+	<br /> <br />
 	<p style="text-align: center;">
-		<img src="https://i.ibb.co/MZ35ccf/isola-statement.png"
+		<img
+			src="https://github.com/wala-fr/CodingameIsolation/blob/master/CodingameIsolation/src/main/resources/view/statement/isola_statement.png?raw=true"
 			style="height: 150px; width: auto;"></img>
 	</p>
-	Click <a href="https://github.com/wala-fr">here</a> for the
-	referee.<br />
+	<p>
+		The source code of this game is available <a rel="nofollow"
+			target="_blank" href="https://github.com/wala-fr/CodingameIsolation">on
+			this GitHub repo</a>. <br />
 </div>
 
 <div id="statement_back" class="statement_back" style="display: none"></div>
@@ -19,7 +22,7 @@
 			<span class="icon icon-goal">&nbsp;</span> <span>The Goal</span>
 		</h1>
 		<div class="statement-goal-content">The goal of the game is to
-			block the opponent pawn.</div>
+			block the opponent's pawn.</div>
 	</div>
 	<!-- RULES -->
 	<div class="statement-section statement-rules">
@@ -29,26 +32,32 @@
 		<div class="statement-rules-content">
 			<strong>Board: </strong>
 			<ul>
-				<li>The game is played on a 7x7 board.</li>
-				<li>Player 0 always starts at (0, 3) and player 1 at (6, 3).</li>
+				<li>The game is played on a <const>7 x 7</const> board.
+				</li>
+				<li>Player 0 always starts at <const>(0, 3)</const> and player
+					1 at <const>(6, 3)</const>.
+				</li>
 			</ul>
 			<strong>At each turn: </strong><br>
 			<ol>
-				<li>You must <b>move your pawn</b> to an adjacent tile (diagonally
-					included).<br />You can't :
+				<li>You must <b>move your pawn</b> to an adjacent tile
+					(diagonal included) :<br>
+				<br>
+
+					<p style="text-align: center;">
+						<img
+							src="https://github.com/wala-fr/CodingameIsolation/blob/master/CodingameIsolation/src/main/resources/view/statement/moves.png?raw=true"
+							style="height: 200px; width: auto;"></img>
+					</p>You can't :
 					<ul>
 						<li>stay put</li>
-						<li>move to the tile occupied by the opponent pawn</li>
+						<li>move to the tile occupied by the opponent's pawn</li>
 						<li>move to an already removed tile.</li>
 					</ul>
 
-					<p style="text-align: center;">
-						<img src="https://i.ibb.co/8DjTxZK/moves.png"
-							style="display: block; margin-left: auto; margin-right: auto; height: 200px; width: auto;"></img>
-					</p>
 				</li>
-				<li>You must <b>remove an accessible tile</b>.<br />You can't remove
-					a tile occupied by a pawn.
+				<li><b>Then</b> you must <b>remove an accessible tile</b>.<br />You
+					can't remove a tile occupied by a pawn.
 				</li>
 			</ol>
 		</div>
@@ -61,7 +70,7 @@
 			<div class="title">Victory Conditions</div>
 			<div class="text">
 				<ul style="padding-bottom: 0;">
-					<li>The opponent pawn can't move.</li>
+					<li>At his turn, the opponent can't move his pawn.</li>
 				</ul>
 			</div>
 		</div>
@@ -74,7 +83,7 @@
 			<div class="title">Loss Conditions</div>
 			<div class="text">
 				<ul style="padding-bottom: 0;">
-					<li>Your pawn can't move.</li>
+					<li>At your turn, you can't move your pawn.</li>
 					<li>You do not respond in time or output an invalid action.</li>
 				</ul>
 			</div>
@@ -96,23 +105,19 @@
 				<var>id</var>
 				: The id of the player. <br> <span class="statement-lineno">Second
 					line</span>:
-				<var>playerPositionX</var>
-				: the x coordinate of your pawn. <br> <span
+				<var>playerPositionX</var><br> <span
 					class="statement-lineno">Second line</span>:
 				<var>playerPositionY</var>
-				: the y coordinate of your pawn.
+				: the coordinates of your pawn.
 			</div>
 			<div class="title">Input for one game turn</div>
 			<div class="text">
-				<span class="statement-lineno">Next <var>opponentPositionX</var></span>:
-				the x coordinate of the opponent pawn. <br> <span
+				<span class="statement-lineno">Next <var>opponentPositionX</var></span><br> <span
 					class="statement-lineno">Next <var>opponentPositionY</var></span>:
-				the y coordinate of the opponent pawn. <br> <span
-					class="statement-lineno">Next <var>opponentLastRemovedTileX</var></span>:
-				the x coordinate of the last tile removed by the opponent (-1 if no
-				tile has been removed (first round)). <br> <span
+				the coordinates of the opponent's pawn. <br> <span
+					class="statement-lineno">Next <var>opponentLastRemovedTileX</var></span><br> <span
 					class="statement-lineno">Next <var>opponentLastRemovedTileY</var></span>:
-				the y coordinate of the last tile removed by the opponent (-1 if no
+				the coordinates of the last tile removed by the opponent (<const>-1 -1</const> if no
 				tile has been removed (first round)). <br>
 			</div>
 		</div>
@@ -123,9 +128,15 @@
 			<div class="text">
 				<span class="statement-lineno">A single line</span> containing the
 				coordinates where you want to move your pawn, followed by the
-				coordinates of the tile you want to remove. Example "3 1 3 5".<br>
-				You can also print messages by doing the following. Example: "3 1 3
-				5;message". <br>
+				coordinates of the tile you want to remove.<br>Example:
+				<action>3 1 3 5</action>
+				<br> You can also add a message :<br>
+				Example:
+				<action>3 1 3 5;MESSAGE</action>
+				<br> NB : You can print
+				<action>RANDOM</action>
+				instead of the 4 coordinates. Then a random possible move and tile
+				will be chosen.
 			</div>
 		</div>
 

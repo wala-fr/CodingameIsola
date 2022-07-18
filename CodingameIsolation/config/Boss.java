@@ -15,7 +15,7 @@ class Player {
 
       int xTileRemoved = in.nextInt();
       int yTileRemoved = in.nextInt();
-      System.out.println("RANDOM;RANDOM");
+      System.out.println("RANDOM;I'M THE AI");
     }
   }
 }

@@ -1,8 +1,6 @@
 package com.codingame.game;
 
 import java.util.Arrays;
-import java.util.Random;
-import javax.management.monitor.GaugeMonitorMBean;
 import com.codingame.gameengine.core.AbstractPlayer.TimeoutException;
 import com.codingame.gameengine.core.AbstractReferee;
 import com.codingame.gameengine.core.GameManager;
@@ -24,17 +22,16 @@ public class Referee extends AbstractReferee {
   @Inject private TooltipModule tooltips;
   @Inject private ToggleModule toggleModule;
   @Inject private EndScreenModule endScreenModule;
+  @Inject private Viewer viewer;
 
   Board board;
-  Viewer viewer;
   Player currentPlayer;
-  boolean wonByTimeout = false;
 
   @Override
   public void init() {
     board = new Board();
     board.init();
-    viewer = new Viewer(graphics, board, gameManager, toggleModule, tooltips);
+    viewer.init(board);
     currentPlayer = gameManager.getPlayer(0);
     gameManager.setMaxTurns(Constant.HEIGHT * Constant.WIDTH);
     gameManager.setFirstTurnMaxTime(Constant.FIRST_ROUND_TIME_OUT);
@@ -66,12 +63,12 @@ public class Referee extends AbstractReferee {
               Arrays.stream(outputs[0].split(" ")).mapToInt(s -> Integer.parseInt(s)).toArray();
           if (coordinates.length != 4) {
             throw new InvalidMoveException(
-                "You must give 4 integer coordinates separated by space.");
+                "You must give 4 integer coordinates separated by spaces.");
           }
           move = new Point(coordinates[0], coordinates[1]);
           tile = new Point(coordinates[2], coordinates[3]);
         } catch (NumberFormatException e) {
-          throw new InvalidMoveException("You must give 4 integer coordinates separated by space.");
+          throw new InvalidMoveException("You must give 4 integer coordinates separated by spaces.");
         }
       }
       board.movePawn(teamId, move);
@@ -86,7 +83,6 @@ public class Referee extends AbstractReferee {
       currentPlayer.deactivate(nickName + " timeout.");
       currentPlayer.setScore(-1);
       gameManager.endGame();
-      wonByTimeout = true;
       return;
     } catch (InvalidMoveException e) {
       gameManager.addToGameSummary(
@@ -94,12 +90,12 @@ public class Referee extends AbstractReferee {
       currentPlayer.deactivate(nickName + " made an invalid action.");
       currentPlayer.setScore(-1);
       gameManager.endGame();
-      wonByTimeout = true;
       return;
     }
     if (!board.canMove(1 - teamId)) {
       gameManager.getPlayer(teamId).setScore(1);
       gameManager.endGame();
+      return;
     }
     currentPlayer = gameManager.getPlayer(1 - teamId);
   }
@@ -125,7 +121,7 @@ public class Referee extends AbstractReferee {
     String[] text = new String[2];
     int winId = scores[0] > scores[1] ? 0 : 1;
     String nickName = gameManager.getPlayer(winId).getNicknameToken();
-    gameManager.addToGameSummary(GameManager.formatErrorMessage(nickName + " won"));
+    gameManager.addToGameSummary(GameManager.formatSuccessMessage(nickName + " won"));
     gameManager.addTooltip(gameManager.getPlayer(winId), nickName + " won");
     text[1 - winId] = "Lost";
     text[winId] = "Won";

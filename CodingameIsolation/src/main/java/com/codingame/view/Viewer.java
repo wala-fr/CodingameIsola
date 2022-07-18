@@ -10,22 +10,24 @@ import com.codingame.gameengine.module.tooltip.TooltipModule;
 import com.codingame.model.Board;
 import com.codingame.model.Point;
 import com.codingame.parameter.Constant;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class Viewer {
+
+  @Inject private MultiplayerGameManager<Player> gameManager;
+  @Inject private GraphicEntityModule graphics;
+  @Inject private TooltipModule tooltips;
 
   private RoundedRectangle[][] rectangles;
   private Circle[] pawns = new Circle[2];
   private PlayerUI[] playerUIS = new PlayerUI[2];
-  private int CIRCLE_COORDINATE_DELTA;
+  private int circleCoordinateDelta;
 
-  public Viewer(
-      GraphicEntityModule graphics,
-      Board board,
-      MultiplayerGameManager<Player> gameManager,
-      ToggleModule toggleModule,
-      TooltipModule tooltips) {
-    int VIEWER_WIDTH = graphics.getWorld().getWidth();
-    int VIEWER_HEIGHT = graphics.getWorld().getHeight();
+  public void init(Board board) {
+    int viewerWidth = graphics.getWorld().getWidth();
+    int viewerHeight = graphics.getWorld().getHeight();
     int height = Constant.HEIGHT;
     int width = Constant.WIDTH;
     rectangles = new RoundedRectangle[height][width];
@@ -34,11 +36,12 @@ public class Viewer {
         .setWidth(1920)
         .setHeight(1080)
         .setFillColor(ViewConstant.BACK_GROUND_COLOR);
-    int rectangleSize = VIEWER_HEIGHT / (height + 1);
+    int rectangleSize = viewerHeight / (height + 1);
     int fontSize = rectangleSize / 2;
 
-    int startX = (VIEWER_WIDTH - rectangleSize * width + fontSize) / 2;
+    int startX = (viewerWidth - rectangleSize * width + fontSize) / 2;
     int d = 11;
+    // color the board
     graphics
         .createRectangle()
         .setX(startX - d)
@@ -89,7 +92,7 @@ public class Viewer {
     }
     int circleGape = ViewConstant.TILE_GAP + ViewConstant.PAWN_GAP;
     int circleRadius = rectangleSize / 2 - circleGape;
-    CIRCLE_COORDINATE_DELTA = circleRadius + circleGape;
+    circleCoordinateDelta = circleRadius + circleGape;
     for (int i = 0; i < 2; i++) {
       Point teamPosition = board.getTeamPosition(i);
       pawns[i] =
@@ -117,7 +120,7 @@ public class Viewer {
     graphics.commitEntityState(0.4, pawns[player]);
 
     getRectangle(tile).setFillColor(ViewConstant.BOARD_COLOR);
-    graphics.commitEntityState(0.9, getRectangle(tile));
+    graphics.commitEntityState(1, getRectangle(tile));
   }
 
   private RoundedRectangle getRectangle(Point p) {
@@ -127,7 +130,7 @@ public class Viewer {
   private void setPawnPosition(int teamId, Point teamPosition) {
     RoundedRectangle rectangle = getRectangle(teamPosition);
     pawns[teamId]
-        .setX(rectangle.getX() + CIRCLE_COORDINATE_DELTA)
-        .setY(rectangle.getY() + CIRCLE_COORDINATE_DELTA);
+        .setX(rectangle.getX() + circleCoordinateDelta)
+        .setY(rectangle.getY() + circleCoordinateDelta);
   }
 }
