@@ -93,7 +93,7 @@ public class Referee extends AbstractReferee {
       return;
     }
     if (!board.canMove(1 - teamId)) {
-      gameManager.getPlayer(teamId).setScore(1);
+      currentPlayer.setScore(1);
       gameManager.endGame();
       return;
     }

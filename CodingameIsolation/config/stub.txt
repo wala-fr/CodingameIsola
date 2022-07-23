@@ -8,6 +8,6 @@ read opponentLastRemovedTileY:int
 write RANDOM;MESSAGE
 
 INPUT
-playerPositionY:player coordinates.
-opponentPositionY:opponent coordinates.
-opponentLastRemovedTileY:coordinates of last removed tile. (-1 -1) if no tile has been removed.
+playerPositionY:player's coordinates.
+opponentPositionY:opponent's coordinates.
+opponentLastRemovedTileY:coordinates of the last removed tile. (-1 -1) if no tile has been removed.

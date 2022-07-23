@@ -1,6 +1,7 @@
 /target/
 /config/level1/Boss.java
 /config/level2/Boss.java
+/config/level3/Boss.java
 /.settings/
 /.classpath
 /.project
