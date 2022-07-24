@@ -13,6 +13,7 @@ import com.codingame.model.Board;
 import com.codingame.model.InvalidMoveException;
 import com.codingame.model.Point;
 import com.codingame.parameter.Constant;
+import com.codingame.view.ViewConstant;
 import com.codingame.view.Viewer;
 import com.google.inject.Inject;
 
@@ -36,7 +37,7 @@ public class Referee extends AbstractReferee {
     gameManager.setMaxTurns(Constant.HEIGHT * Constant.WIDTH);
     gameManager.setFirstTurnMaxTime(Constant.FIRST_ROUND_TIME_OUT);
     gameManager.setTurnMaxTime(Constant.TIME_OUT);
-    gameManager.setFrameDuration(Constant.FRAME_DURATION);
+    gameManager.setFrameDuration(ViewConstant.FRAME_DURATION);
   }
 
   @Override

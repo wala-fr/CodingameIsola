@@ -23,8 +23,14 @@ public class ViewConstant {
   
   public static final int TILE_GAP = 20;
   public static final int PAWN_GAP = 2;
-  
+  public static final int PAWN_LINE_WIDTH = 0;
+
   public static final String FONT = "Verdana";
+  
+  public static final int FRAME_DURATION = 800;
+  public static final double PAWN_TIME = 0.5;
+
+
 
 
 

@@ -95,7 +95,12 @@ public class Viewer {
     for (int i = 0; i < 2; i++) {
       Point teamPosition = board.getTeamPosition(i);
       pawns[i] =
-          graphics.createCircle().setRadius(circleRadius).setFillColor(ViewConstant.PAWN_COLORS[i]);
+          graphics
+              .createCircle()
+              .setRadius(circleRadius)
+              .setFillColor(ViewConstant.PAWN_COLORS[i])
+              .setLineColor(ViewConstant.BOARD_COLOR)
+              .setLineWidth(ViewConstant.PAWN_LINE_WIDTH);
       setPawnPosition(i, teamPosition);
     }
     for (int i = 0; i < 2; ++i) {
@@ -117,7 +122,7 @@ public class Viewer {
     graphics.commitEntityState(0, playerUIS[1 - player].group);
 
     setPawnPosition(player, move);
-    graphics.commitEntityState(0.4, pawns[player]);
+    graphics.commitEntityState(ViewConstant.PAWN_TIME, pawns[player]);
 
     getRectangle(tile).setFillColor(ViewConstant.BOARD_COLOR);
     graphics.commitEntityState(1, getRectangle(tile));
