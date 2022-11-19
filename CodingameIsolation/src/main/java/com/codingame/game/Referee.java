@@ -47,7 +47,7 @@ public class Referee extends AbstractReferee {
     try {
       sendInputs(turn);
       currentPlayer.execute();
-      String[] outputs = currentPlayer.getOutputs().get(0).split(";");
+      String[] outputs = currentPlayer.getOutputs().get(0).split(";", -1);
       if (outputs.length > 1) {
         String message = outputs[1];
         currentPlayer.setMessage(message);
